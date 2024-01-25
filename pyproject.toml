@@ -44,6 +44,14 @@ ignore = [
 [tool.ruff.flake8-annotations]
 allow-star-arg-any = true
 
+[tool.ruff.pep8-naming]
+# Allow Pydantic's `@validator` decorator to trigger class method treatment.
+classmethod-decorators = [
+    "classmethod",
+    "pydantic.validator",
+    "pydantic.model_validator",
+]
+
 [tool.ruff.flake8-bugbear]
 extend-immutable-calls = ["fastapi.File"]
 
@@ -53,10 +61,10 @@ extend-immutable-calls = ["fastapi.File"]
 [tool.taskipy.tasks]
 start = "uvicorn fastapi_study.ch03.app:app --reload"
 test = "pytest tests"
-mypy = "mypy src tests"
+mypy = "mypy fastapi_study tests"
 ruff = "task ruff-check && task ruff-format"
-ruff-check = "ruff check src --fix"
-ruff-format = "ruff format src"
+ruff-check = "ruff check fastapi_study --fix"
+ruff-format = "ruff format fastapi_study"
 
 [build-system]
 requires = ["poetry-core"]
